@@ -82,3 +82,7 @@ class Player(object):
         self.runCount = 0
         self.slideUp = False
         self.hitbox = (self.x + 4, self.y, self.width - 24, self.height - 10)
+
+    def start_jump(self):
+        self.jumping = True
+        self.assets.jump_sound.play()

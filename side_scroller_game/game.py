@@ -118,6 +118,7 @@ class Game:
                     self.player.shield = False
                 else:
                     self.player.falling = True
+                    self.assets.hit_sound.play(loops=2, maxtime=500)
                     if self.pause == 0:
                         self.pause = 1
                         self.fallSpeed = self.speed
@@ -128,6 +129,7 @@ class Game:
 
         for powerup in self.powerups:
             if powerup.collide(self.player.hitbox):
+                self.assets.powerup_sound.play()
                 if isinstance(powerup, Shield):
                     self.player.shield = True
                 elif isinstance(powerup, ScoreMultiplier):
@@ -183,8 +185,8 @@ class Game:
             keys = pygame.key.get_pressed()
             if keys[pygame.K_SPACE] or keys[pygame.K_UP]:
                 if not self.player.jumping:
-                    self.player.jumping = True
-            if keys[pygame.K_DOWN]:
+                    self.player.start_jump()
+            elif keys[pygame.K_DOWN]:
                 if not (self.player.sliding):
                     self.player.sliding = True
             if keys[pygame.K_p]:

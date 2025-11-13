@@ -65,6 +65,7 @@ class Spike(Saw):
                 return True
         return False
 
+
 class GroundEnemy(object):
     def __init__(self, x, y, width, height, assets):
         self.x = x
