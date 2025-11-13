@@ -1,0 +1,75 @@
+import pygame
+
+class Player(object):
+    jumpList = [
+        1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+        4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, -1, -1, -1, -1, -1, -1, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2,
+        -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4
+    ]
+
+    def __init__(self, x, y, width, height, assets):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.assets = assets
+        self.jumping = False
+        self.sliding = False
+        self.falling = False
+        self.slideCount = 0
+        self.jumpCount = 0
+        self.runCount = 0
+        self.slideUp = False
+        self.shield = False
+        self.score_multiplier = False
+        self.hitbox = (self.x + 4, self.y, self.width - 24, self.height - 10)
+
+    def draw(self, win):
+        if self.falling:
+            win.blit(self.assets.fall, (self.x, self.y + 30))
+        elif self.jumping:
+            self.y -= self.jumpList[self.jumpCount] * 1.3
+            win.blit(self.assets.jump[self.jumpCount // 18], (self.x, self.y))
+            self.jumpCount += 1
+            if self.jumpCount > 108:
+                self.jumpCount = 0
+                self.jumping = False
+                self.runCount = 0
+            self.hitbox = (self.x + 4, self.y, self.width - 24, self.height - 10)
+        elif self.sliding or self.slideUp:
+            if self.slideCount < 20:
+                self.y += 1
+                self.hitbox = (self.x + 4, self.y, self.width - 24, self.height - 10)
+            elif self.slideCount == 80:
+                self.y -= 19
+                self.sliding = False
+                self.slideUp = True
+            elif self.slideCount > 20 and self.slideCount < 80:
+                self.hitbox = (self.x, self.y + 3, self.width - 8, self.height - 35)
+
+            if self.slideCount >= 110:
+                self.slideCount = 0
+                self.runCount = 0
+                self.slideUp = False
+                self.hitbox = (self.x + 4, self.y, self.width - 24, self.height - 10)
+            win.blit(self.assets.slide[self.slideCount // 10], (self.x, self.y))
+            self.slideCount += 1
+        else:
+            if self.runCount > 42:
+                self.runCount = 0
+            win.blit(self.assets.run[self.runCount // 6], (self.x, self.y))
+            self.runCount += 1
+            self.hitbox = (self.x + 4, self.y, self.width - 24, self.height - 13)
+
+    def reset(self):
+        self.x = 200
+        self.y = 313
+        self.jumping = False
+        self.sliding = False
+        self.falling = False
+        self.slideCount = 0
+        self.jumpCount = 0
+        self.runCount = 0
+        self.slideUp = False
+        self.hitbox = (self.x + 4, self.y, self.width - 24, self.height - 10)
