@@ -1,4 +1,4 @@
-from .game import Game
+from side_scroller_game.game import Game
 
 
 def main():

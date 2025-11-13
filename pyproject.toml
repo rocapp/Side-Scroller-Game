@@ -1,9 +1,16 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [project]
 name = "side-scroller-game"
 version = "0.1.0"
-description = "Add your description here"
+description = "simple side-scroller game implemented using pygame"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "pygame>=2.6.1",
 ]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/side_scroller_game"]

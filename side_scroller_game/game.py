@@ -6,6 +6,7 @@ from .player import Player
 from .obstacles import Saw, Spike, Bird, GroundEnemy
 from .powerups import Shield, ScoreMultiplier
 
+
 class Game:
     def __init__(self):
         pygame.init()
@@ -62,25 +63,31 @@ class Game:
             quit_button_y = 320
 
             if start_button_x + button_width > mouse[0] > start_button_x and start_button_y + button_height > mouse[1] > start_button_y:
-                pygame.draw.rect(self.win, (0, 255, 0), (start_button_x, start_button_y, button_width, button_height))
+                pygame.draw.rect(self.win, (0, 255, 0), (start_button_x,
+                                 start_button_y, button_width, button_height))
                 if click[0] == 1:
                     run = False
             else:
-                pygame.draw.rect(self.win, (0, 200, 0), (start_button_x, start_button_y, button_width, button_height))
+                pygame.draw.rect(self.win, (0, 200, 0), (start_button_x,
+                                 start_button_y, button_width, button_height))
 
             if quit_button_x + button_width > mouse[0] > quit_button_x and quit_button_y + button_height > mouse[1] > quit_button_y:
-                pygame.draw.rect(self.win, (255, 0, 0), (quit_button_x, quit_button_y, button_width, button_height))
+                pygame.draw.rect(self.win, (255, 0, 0), (quit_button_x,
+                                 quit_button_y, button_width, button_height))
                 if click[0] == 1:
                     pygame.quit()
                     exit()
             else:
-                pygame.draw.rect(self.win, (200, 0, 0), (quit_button_x, quit_button_y, button_width, button_height))
+                pygame.draw.rect(self.win, (200, 0, 0), (quit_button_x,
+                                 quit_button_y, button_width, button_height))
 
             small_font = pygame.font.SysFont("comicsans", 30)
             start_text = small_font.render("Start Game", 1, (255, 255, 255))
             quit_text = small_font.render("Quit", 1, (255, 255, 255))
-            self.win.blit(start_text, (start_button_x + (button_width / 2 - start_text.get_width() / 2), start_button_y + (button_height / 2 - start_text.get_height() / 2)))
-            self.win.blit(quit_text, (quit_button_x + (button_width / 2 - quit_text.get_width() / 2), quit_button_y + (button_height / 2 - quit_text.get_height() / 2)))
+            self.win.blit(start_text, (start_button_x + (button_width / 2 - start_text.get_width() / 2),
+                          start_button_y + (button_height / 2 - start_text.get_height() / 2)))
+            self.win.blit(quit_text, (quit_button_x + (button_width / 2 - quit_text.get_width() / 2),
+                          quit_button_y + (button_height / 2 - quit_text.get_height() / 2)))
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -89,13 +96,12 @@ class Game:
 
             pygame.display.update()
 
-
     def update_score(self):
         if self.pause > 0:
             self.pause += 1
             if self.pause > self.fallSpeed * 2:
                 self.end_screen()
-        
+
         if self.player.score_multiplier:
             self.score = (self.speed // 10 - 3) * 2
             self.score_multiplier_timer -= 1
@@ -158,8 +164,8 @@ class Game:
         if r == 0:
             self.powerups.append(Shield(810, 280, 32, 32, self.assets))
         else:
-            self.powerups.append(ScoreMultiplier(810, 280, 32, 32, self.assets))
-
+            self.powerups.append(ScoreMultiplier(
+                810, 280, 32, 32, self.assets))
 
     def create_obstacle(self):
         r = random.randrange(0, 4)
@@ -203,25 +209,31 @@ class Game:
             quit_button_y = 320
 
             if resume_button_x + button_width > mouse[0] > resume_button_x and resume_button_y + button_height > mouse[1] > resume_button_y:
-                pygame.draw.rect(self.win, (0, 255, 0), (resume_button_x, resume_button_y, button_width, button_height))
+                pygame.draw.rect(self.win, (0, 255, 0), (resume_button_x,
+                                 resume_button_y, button_width, button_height))
                 if click[0] == 1:
                     run = False
             else:
-                pygame.draw.rect(self.win, (0, 200, 0), (resume_button_x, resume_button_y, button_width, button_height))
+                pygame.draw.rect(self.win, (0, 200, 0), (resume_button_x,
+                                 resume_button_y, button_width, button_height))
 
             if quit_button_x + button_width > mouse[0] > quit_button_x and quit_button_y + button_height > mouse[1] > quit_button_y:
-                pygame.draw.rect(self.win, (255, 0, 0), (quit_button_x, quit_button_y, button_width, button_height))
+                pygame.draw.rect(self.win, (255, 0, 0), (quit_button_x,
+                                 quit_button_y, button_width, button_height))
                 if click[0] == 1:
                     pygame.quit()
                     exit()
             else:
-                pygame.draw.rect(self.win, (200, 0, 0), (quit_button_x, quit_button_y, button_width, button_height))
+                pygame.draw.rect(self.win, (200, 0, 0), (quit_button_x,
+                                 quit_button_y, button_width, button_height))
 
             small_font = pygame.font.SysFont("comicsans", 30)
             resume_text = small_font.render("Resume", 1, (255, 255, 255))
             quit_text = small_font.render("Quit", 1, (255, 255, 255))
-            self.win.blit(resume_text, (resume_button_x + (button_width / 2 - resume_text.get_width() / 2), resume_button_y + (button_height / 2 - resume_text.get_height() / 2)))
-            self.win.blit(quit_text, (quit_button_x + (button_width / 2 - quit_text.get_width() / 2), quit_button_y + (button_height / 2 - quit_text.get_height() / 2)))
+            self.win.blit(resume_text, (resume_button_x + (button_width / 2 - resume_text.get_width() / 2),
+                          resume_button_y + (button_height / 2 - resume_text.get_height() / 2)))
+            self.win.blit(quit_text, (quit_button_x + (button_width / 2 - quit_text.get_width() / 2),
+                          quit_button_y + (button_height / 2 - quit_text.get_height() / 2)))
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -230,11 +242,11 @@ class Game:
 
             pygame.display.update()
 
-
     def redraw_window(self):
         self.win.blit(self.assets.bg, (self.bgX, 0))
         self.win.blit(self.assets.bg, (self.bgX2, 0))
-        text = self.font.render("Score: " + str(self.score), 1, (255, 255, 255))
+        text = self.font.render(
+            "Score: " + str(self.score), 1, (255, 255, 255))
         self.player.draw(self.win)
         for obstacle in self.obstacles:
             obstacle.draw(self.win)
@@ -243,7 +255,7 @@ class Game:
 
         if self.player.shield:
             self.win.blit(self.assets.shield, (650, 10))
-        
+
         if self.player.score_multiplier:
             self.win.blit(self.assets.score_multiplier, (600, 10))
 
@@ -267,10 +279,14 @@ class Game:
                     run = False
             self.win.blit(self.assets.bg, (0, 0))
             large_font = pygame.font.SysFont("comicsans", 80)
-            last_score = large_font.render("Best Score: " + str(self.update_file()), 1, (255, 255, 255))
-            current_score = large_font.render("Score: " + str(self.score), 1, (255, 255, 255))
-            self.win.blit(last_score, (self.W / 2 - last_score.get_width() / 2, 150))
-            self.win.blit(current_score, (self.W / 2 - current_score.get_width() / 2, 240))
+            last_score = large_font.render(
+                "Best Score: " + str(self.update_file()), 1, (255, 255, 255))
+            current_score = large_font.render(
+                "Score: " + str(self.score), 1, (255, 255, 255))
+            self.win.blit(last_score, (self.W / 2 -
+                          last_score.get_width() / 2, 150))
+            self.win.blit(current_score, (self.W / 2 -
+                          current_score.get_width() / 2, 240))
             pygame.display.update()
         self.score = 0
 
