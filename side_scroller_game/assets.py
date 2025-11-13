@@ -7,11 +7,11 @@ def load_image(filename):
     base_path = os.path.dirname(os.path.abspath(__file__))
     return pygame.image.load(os.path.join(base_path, "images", filename))
 
+
 def load_sound(filename):
     """Loads a sound from the 'sounds' directory, relative to this file."""
     base_path = os.path.dirname(os.path.abspath(__file__))
     return pygame.mixer.Sound(os.path.join(base_path, "sounds", filename))
-
 
 
 class Assets:
@@ -47,6 +47,7 @@ class Assets:
         self.jump_sound = load_sound("jump.wav")
         self.powerup_sound = load_sound("powerup.wav")
         self.hit_sound = load_sound("hit.wav")
+
 
 def init_assets():
     return Assets()
