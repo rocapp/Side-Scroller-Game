@@ -19,7 +19,7 @@ class Game:
         self.bgX = 0
         self.bgX2 = self.assets.bg.get_width()
         self.clock = pygame.time.Clock()
-        self.speed = 30
+        self.speed = 60
         self.score = 0
         self.obstacles = []
         self.powerups = []
@@ -118,7 +118,7 @@ class Game:
                     self.player.shield = False
                 else:
                     self.player.falling = True
-                    self.assets.hit_sound.play(loops=2, maxtime=500)
+                    self.assets.hit_sound.play(loops=1)
                     if self.pause == 0:
                         self.pause = 1
                         self.fallSpeed = self.speed
